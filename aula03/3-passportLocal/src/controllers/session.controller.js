@@ -14,11 +14,11 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      return res.status(400).send({ status: "error", error: "Incomplete values" })
+      return res.status(400).send({ statu: "error", error: "Incomplete values" })
     }
     const user = await loginUser(email, password);
     if (!user) {
-      return res.status(404).send({ status: "error", error: "User not found" })
+      return res.status(404).send({ statu: "error", error: "User not found" })
     }
     req.session.user = user;
 
@@ -54,8 +54,7 @@ const handleReset = async (req, res) => {
   const { email, newPassword } = req.body;
   const updated = await resetPassword(email, newPassword);
   if (!updated) {
-    return res.redirect('/reset-password?error=' + 
-      encodeURIComponent('Usuário não encontrado ou nova senha é igual à antiga'));
+    return res.redirect('/reset-password?error=' + encodeURIComponent('Usuário não encontrado'));
   }
   res.redirect('/reset-password?success=' + encodeURIComponent('Senha redefinida com sucesso'));
 };

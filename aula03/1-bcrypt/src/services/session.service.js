@@ -24,8 +24,9 @@ async function loginUser(email, password) {
 
   if (user) { //antes de tentar comparar a senha, é preciso saber se o usuário existe no banco
     const valid = isValidPassword(user.password, password);
-    console.log("Senha enviada:", password);
-    console.log("Senha enviada hasheada: ", createHash(user.password));
+    console.log("Senha enviada no body:", password);
+    console.log("Senha do banco: ", user.password);
+    console.log("Senha enviada hasheada: ", createHash(password));
     console.log("Hash salvo:", user.password);
 
     if (valid) {

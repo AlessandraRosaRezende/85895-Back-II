@@ -27,17 +27,22 @@ app.post('/login', (req, res) => {
   const user = users.find(user => user.email === email && user.password === password);
   if (!user) return res.status(400).send({ status: 'error', error: 'Invalid credentials' });
 
-  const access_token = generateToken(user);
+  const access_token = generateToken(user.email);
   res.send({ status: "success", access_token })
 });
 
 app.get('/current', authToken, (req, res) => {
-  // tirar a senha
+  const email = req.user;
+
+  const user = users.find(u => u.email === email);
+  if (!user) return res.status(404).send({ error: 'User not found' });
+
   const userToShow = {
-    name: req.user.name,
-    email: req.user.email
-  }
-  res.send({ status: "success", payload: userToShow })
+    name: user.name,
+    email: user.email
+  };
+
+  res.send({ status: "success", payload: userToShow });
 });
 
 app.listen(8080, () => {

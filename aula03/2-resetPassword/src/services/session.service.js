@@ -43,7 +43,15 @@ async function resetPassword(email, newPassword) {
   const user = await userModel.findOne({ email });
   if (!user) return false;
 
+  console.log(user.password);
+  console.log(newPassword);
+  console.log(createHash(newPassword));
+  console.log(user.password === createHash(newPassword));
+
   const hashPass = createHash(newPassword);
+  if (isValidPassword(user.password, newPassword)) {
+    return false; // Nova senha é igual à antiga
+  }
   user.password = hashPass;
   await user.save();
   return true;

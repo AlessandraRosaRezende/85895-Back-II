@@ -28,6 +28,7 @@ router.post('/login', (req, res) => {
   }
   const token = authService.generateToken({ email });
   res.cookie('access_token', token, {
+    httpOnly: true,
     maxAge: 60 * 1000 // 1 minuto
   });
   res.redirect('/');
