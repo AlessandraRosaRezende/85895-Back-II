@@ -7,7 +7,7 @@ const showLogin = async(req, res) => {
 
 const showCurrent = async(req, res) => {
   const user = await userService.findById(req.user.id);
-  if (!user) return res.redirect('/users/login');
+  if (!user) return res.status(404).send('User not found');
   res.render('current', { user });
 }
 

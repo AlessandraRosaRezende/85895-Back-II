@@ -8,11 +8,17 @@ require('dotenv').config();
 const apiRoutes = require('./routes/user.router');
 const viewRoutes = require('./routes/view.router');
 
+const initializePassport = require('./config/passport.config');
+const passport = require('passport');
+
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
+
+initializePassport();
+app.use(passport.initialize());
 
 app.engine('handlebars', handlebars.engine());
 app.set('view engine', 'handlebars');

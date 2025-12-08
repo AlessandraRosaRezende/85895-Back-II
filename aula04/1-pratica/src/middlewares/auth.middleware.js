@@ -1,16 +1,16 @@
 const { verifyToken } = require('../utils/auth');
 
-const checkAuth = async(req, res, next) => {
-  const token = req.signedCookies.currentUser;
-  if (!token) return res.redirect('/users/login');
-  try {
-    req.user = verifyToken(token);
-    next();
-  } catch {
-    res.clearCookie('currentUser');
-    res.redirect('/users/login');
-  }
-}
+// const checkAuth = async(req, res, next) => {
+//   const token = req.signedCookies.currentUser;
+//   if (!token) return res.redirect('/users/login');
+//   try {
+//     req.user = verifyToken(token);
+//     next();
+//   } catch {
+//     res.clearCookie('currentUser');
+//     res.redirect('/users/login');
+//   }
+// }
 
 const checkNotAuth = async(req, res, next) => {
   if (req.signedCookies.currentUser) {
@@ -19,4 +19,4 @@ const checkNotAuth = async(req, res, next) => {
   next();
 }
 
-module.exports = { checkAuth, checkNotAuth };
+module.exports = { checkNotAuth };
