@@ -21,6 +21,7 @@ const initializePassport = () => {
     secretOrKey: process.env.JWT_SECRET
   }, async (jwtPayload, done) => {
     try {
+      console.log(jwtPayload);
       const user = await User.findById(jwtPayload.id);
       if (!user) {
         return done(null, false, { messages: 'User not found' });

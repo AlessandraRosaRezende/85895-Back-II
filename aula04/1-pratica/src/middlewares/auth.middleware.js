@@ -27,10 +27,28 @@ const passportCall = (strategy) => {
       if (!user) {
         return res.status(401).send({ error: info.messages ? info.messages : info.toString() })
       }
-      req.user = user;
+      const userInfo = {
+        id: user._id,
+        email: user.email,
+        role: user.role,
+      }
+      req.user = userInfo;
       next();
     })(req, res, next)
   }
 }
 
-module.exports = { checkNotAuth, passportCall };
+const authorization = (role) => {
+  return async (req, res, next) => {
+    console.log(req.user);
+    if (!req.user) return res.status(401).send({ error: "Unauthorized" })
+    if (req.user.role != role) {
+      console.log(req.user.role);
+      console.log(role);
+      return res.status(403).send({ error: "No permission" })
+    }
+    next()
+  }
+}
+
+module.exports = { checkNotAuth, passportCall, authorization };
