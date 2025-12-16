@@ -1,6 +1,6 @@
 // será executado imediatamente antes de sair do processo
 process.on('exit', (code) => {
-  console.log('Este processo será executado imediatamente antes da saída do processo Node.js')
+  console.log('Este processo será executado imediatamente antes da saída do processo Node.js', code)
 })
 
 // captura as exceções não tratadas
@@ -13,7 +13,7 @@ process.on('message', message => {
 })
 
 console.log('hello world');
-// process.exit(1); // mostra depois - não dá o erro
+process.exit(1); // sai do processo com código 1
 
 // essa função não existe, logo teremos uma exceção não tratado
 console();

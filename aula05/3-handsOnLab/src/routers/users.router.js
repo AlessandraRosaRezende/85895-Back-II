@@ -12,6 +12,10 @@ class GeralRouter extends Router {
     this.get("/", ["PUBLIC"], (req, res) => {
       return res.sendSuccess("Olá, Coders!");
     });
+
+    this.post("/", ["ADMIN"], (req, res) => {
+      res.sendSuccess("Usuário criado com sucesso!");
+    });
   }
 }
 

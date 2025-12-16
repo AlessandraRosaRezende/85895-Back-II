@@ -21,14 +21,16 @@ program
 // Obtendo as opções passadas pela linha de comando
 const options = program.opts();
 console.log(options);
-
+let result;
 // Verificando se a opção 'mode' foi definida como 'development' ou 'production'
 if (options.mode === 'development') {
   // Carregando as variáveis de ambiente do arquivo .env.dev se o modo for 'development'
-  dotenv.config({ path: './.env.dev' });
+  result = dotenv.config({ path: './.env.dev' });
+  console.log(result.parsed);
 } else if (options.mode === 'production') {
   // Carregando as variáveis de ambiente do arquivo .env.prod se o modo for 'production'
-  dotenv.config({ path: './.env.prod' });
+  result = dotenv.config({ path: './.env.prod' });
+  console.log(result.parsed);
 } else {
   // Caso o modo não seja definido corretamente, exibe uma mensagem de erro e encerra o programa
   console.error('Ambiente de trabalho não definido');

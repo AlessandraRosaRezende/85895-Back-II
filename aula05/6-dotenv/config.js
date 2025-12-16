@@ -1,6 +1,8 @@
 const dotenv = require('dotenv');
 
-dotenv.config();
+const environment = 'production'; // Change this value to switch environments
+
+dotenv.config({ path: `.env.${environment}` });
 
 module.exports = {
   port: process.env.PORT,

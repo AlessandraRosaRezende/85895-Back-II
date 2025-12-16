@@ -62,11 +62,11 @@ class Router {
   }
 
   put(path, polices, ...callbacks) {
-    this.router.post(path, this.handlePolices(polices), this.generateCustomResponses, this.applyCallback(callbacks));
+    this.router.put(path, this.handlePolices(polices), this.generateCustomResponses, this.applyCallback(callbacks));
   }
 
   delete(path, polices, ...callbacks) {
-    this.router.post(path, this.handlePolices(polices), this.generateCustomResponses, this.applyCallback(callbacks));
+    this.router.delete(path, this.handlePolices(polices), this.generateCustomResponses, this.applyCallback(callbacks));
   }
 }
 

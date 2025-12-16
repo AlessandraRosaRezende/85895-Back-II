@@ -12,11 +12,7 @@ class Router {
 
   init() { }
 
-  get(path, ...callbacks) {
-    this.router.get(path, this.applyCallback(callbacks));
-  }
-
-  applyCallback(callbacks) {
+    applyCallback(callbacks) {
     // mapeia os callbacks um a um, obtendo seus parâmetros
     return callbacks.map((callback) => async (...params) => {
       try {
@@ -28,6 +24,29 @@ class Router {
         params[1].status(500).send(error);
       }
     });
+  }
+
+  generateCustomResponses = (req, res, next) => {
+    res.sendSuccess = (payload) => res.status(201).json({ status: "success", payload });
+    res.sendServerError = (error) => res.status(500).json({ status: "error", error });
+    res.sendoUserError = (error) => res.status(400).json({ status: "error", error });
+    next();
+  };
+
+  get(path, ...callbacks) {
+    this.router.get(path, this.generateCustomResponses, this.applyCallback(callbacks));
+  }
+
+  post(path, ...callbacks) {
+    this.router.post(path, this.generateCustomResponses, this.applyCallback(callbacks));
+  }
+
+  put(path, ...callbacks) {
+    this.router.put(path, this.generateCustomResponses, this.applyCallback(callbacks));
+  }
+
+  delete(path, ...callbacks) {
+    this.router.delete(path, this.generateCustomResponses, this.applyCallback(callbacks));
   }
 }
 
