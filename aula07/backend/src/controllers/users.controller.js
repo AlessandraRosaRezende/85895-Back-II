@@ -6,12 +6,17 @@ const getUserById = async (req, res) => {
   res.send({ status: "success", result: "user" });
 };
 
-const saveUser = async (req, res) => {
+const createUser = async (req, res) => {
   res.send({ status: "success", result: "userCreated" });
 };
+
+const updateUser = async (req, res) => {
+  res.send({ status: "success", result: "userUpdated" });
+}
 
 module.exports = {
   getUsers,
   getUserById,
-  saveUser,
+  createUser,
+  updateUser,
 };
