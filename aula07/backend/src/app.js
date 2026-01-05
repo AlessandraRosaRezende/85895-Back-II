@@ -2,9 +2,11 @@ const express = require('express');
 const usersRouter = require('./routes/users.router');
 const businessRouter = require('./routes/business.router');
 const ordersRouter = require('./routes/orders.router');
-const { port } = require('./config/config')
+const { port, connectDB } = require('./config/config')
 
 const app = express();
+
+connectDB();
 
 // Routes
 app.get('/', (req, res) => {
