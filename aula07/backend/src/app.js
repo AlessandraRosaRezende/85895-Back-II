@@ -3,8 +3,12 @@ const usersRouter = require('./routes/users.router');
 const businessRouter = require('./routes/business.router');
 const ordersRouter = require('./routes/orders.router');
 const { port, connectDB } = require('./config/config')
+const cors = require('cors');
 
 const app = express();
+
+// Middlewares
+app.use(cors());
 app.use(express.json()); // IMPORTANTE: para que o express consiga interpretar JSON no body das requisições
 app.use(express.urlencoded({ extended: true }));
 
