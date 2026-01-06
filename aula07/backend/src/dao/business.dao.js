@@ -16,7 +16,7 @@ const createBusiness = async (businessData) => {
 }
 
 const addProduct = async (id, productData) => {
-  const updatedBusiness = await businessModel.findByIdAndUpdate(id, { $set: productData }, { new: true });
+  const updatedBusiness = await businessModel.findByIdAndUpdate({ _id: id }, { $set: productData }, { new: true });
   return updatedBusiness;
 };
 

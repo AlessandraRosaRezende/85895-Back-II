@@ -5,6 +5,8 @@ const ordersRouter = require('./routes/orders.router');
 const { port, connectDB } = require('./config/config')
 
 const app = express();
+app.use(express.json()); // IMPORTANTE: para que o express consiga interpretar JSON no body das requisições
+app.use(express.urlencoded({ extended: true }));
 
 connectDB();
 

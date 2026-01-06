@@ -11,6 +11,11 @@ const orderSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "Users",
   },
+  status: {
+    type: String,
+    enum: ["pending", "preparing", "delivering", "delivered"],
+    default: "pending",
+  },
   products: [],
   totalPrice: Number,
 });

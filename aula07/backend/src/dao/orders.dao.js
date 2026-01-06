@@ -16,7 +16,7 @@ const createOrder = async (orderData) => {
 }
 
 const updateOrder = async (id, orderData) => {
-  const updatedOrder = await orderModel.findOneAndUpdate(id, { $set: orderData }, { new: true });
+  const updatedOrder = await orderModel.findOneAndUpdate({ _id: id }, { $set: orderData }, { new: true });
   return updatedOrder;
 }
 

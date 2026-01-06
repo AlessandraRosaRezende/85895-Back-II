@@ -16,7 +16,7 @@ const createUser = async (userData) => {
 }
 
 const updateUser = async (id, userData) => {
-  const updatedUser = await userModel.findOneAndUpdate(id, { $set: userData }, { new: true });
+  const updatedUser = await userModel.findOneAndUpdate({ _id: id }, { $set: userData }, { new: true });
   return updatedUser;
 };
 
